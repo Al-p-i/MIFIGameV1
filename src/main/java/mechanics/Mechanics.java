@@ -1,18 +1,24 @@
 package mechanics;
 
-import main.Server;
+import main.ServerThread;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ticker.Tickable;
-import ticker.Ticker;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by apomosov on 14.05.16.
  */
-public class Mechanics implements Tickable {
+public class Mechanics extends ServerThread implements Tickable {
     private final static Logger log = LogManager.getLogger(Mechanics.class);
+
+    public Mechanics() {
+        super("mechanics");
+    }
+
+    @Override
+    public synchronized void start() {
+        super.start();
+    }
 
     @Override
     public void tick(long elapsedNanos) {

@@ -1,6 +1,6 @@
 package ticker;
 
-import main.Server;
+import main.ServerThread;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,7 +13,7 @@ import java.util.concurrent.locks.LockSupport;
 /**
  * Created by apomosov on 14.05.16.
  */
-public class Ticker extends Thread implements Tickable {
+public class Ticker extends ServerThread implements Tickable {
     private final static Logger log = LogManager.getLogger(Ticker.class);
 
     private final List<Tickable> tickables;
