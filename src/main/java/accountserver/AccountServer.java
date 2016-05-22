@@ -1,11 +1,15 @@
 package accountserver;
 
+import dao.DatabaseService;
+import dao.UserProfileDAO;
+import dao.UserProfileDAOImpl;
 import main.ServerThread;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +20,6 @@ import java.util.Map;
 public class AccountServer extends ServerThread {
     private static final Logger log = LogManager.getLogger(AccountServer.class);
     private final int port;
-    private Map<String, UserProfile> users = new HashMap<>();
 
 
     public AccountServer(int port) {
@@ -25,11 +28,26 @@ public class AccountServer extends ServerThread {
     }
 
     public boolean addUser(UserProfile userProfile) {
-        return this.users.put(userProfile.getLogin(), userProfile) == null;
+        UserProfileDAO userProfileDAO;
+        try {
+            userProfileDAO = new UserProfileDAOImpl(DatabaseService.getInstance().getSessionFactory());
+        } catch (Exception e) {
+            log.error(e);
+            return false;
+        }
+        userProfileDAO.addUserProfile(userProfile);
+        return true;
     }
 
     public UserProfile getUser(String login) {
-        return this.users.get(login);
+        UserProfileDAO userProfileDAO;
+        try {
+            userProfileDAO = new UserProfileDAOImpl(DatabaseService.getInstance().getSessionFactory());
+        } catch (Exception e) {
+            log.error(e);
+            return null;
+        }
+        return userProfileDAO.getUserByLogin(login);
     }
 
     @Override

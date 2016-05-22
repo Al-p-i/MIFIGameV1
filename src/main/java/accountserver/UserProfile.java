@@ -1,19 +1,34 @@
 package accountserver;
 
+import org.hibernate.annotations.GenericGenerator;
 import org.jetbrains.annotations.NotNull;
 
+import javax.persistence.*;
+
 /**
- * @author esin88
+ * @author a.pomosov
  */
+@Entity
+@Table(name = "USERS")
 public class UserProfile {
+    @Id
+    @GeneratedValue(generator="increment")
+    @GenericGenerator(name="increment", strategy = "increment")
+    private long id;
     @NotNull
     private String login;
     @NotNull
     private String password;
 
+    public UserProfile(){}
+
     public UserProfile(@NotNull String login, @NotNull String password) {
         this.login = login;
         this.password = password;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     @NotNull
@@ -24,5 +39,13 @@ public class UserProfile {
     @NotNull
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String toString() {
+        return "UserProfile{" +
+                "login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

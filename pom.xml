@@ -19,22 +19,25 @@
             </plugin>
         </plugins>
     </build>
+    <properties>
+        <hibernate.version>5.1.0.Final</hibernate.version>
+    </properties>
 
     <dependencies>
         <dependency>
-        	<groupId>org.eclipse.jetty</groupId>
-        	<artifactId>jetty-server</artifactId>
-        	<version>9.3.7.v20160115</version>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-server</artifactId>
+            <version>9.3.7.v20160115</version>
         </dependency>
         <dependency>
-        	<groupId>org.jetbrains</groupId>
-        	<artifactId>annotations</artifactId>
-        	<version>15.0</version>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>15.0</version>
         </dependency>
         <dependency>
-        	<groupId>org.eclipse.jetty</groupId>
-        	<artifactId>jetty-servlet</artifactId>
-        	<version>9.3.7.v20160115</version>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-servlet</artifactId>
+            <version>9.3.7.v20160115</version>
         </dependency>
         <!-- http://mvnrepository.com/artifact/com.caucho/hessian -->
         <dependency>
@@ -56,6 +59,28 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.6.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.191</version>
+        </dependency>
+        <!-- Hibernate -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+        <!-- http://mvnrepository.com/artifact/junit/junit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
         </dependency>
     </dependencies>
 
