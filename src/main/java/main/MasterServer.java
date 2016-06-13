@@ -1,6 +1,7 @@
 package main;
 
 import accountserver.AccountServer;
+import frontend.ReplicationServer;
 import mechanics.Mechanics;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,10 +27,12 @@ public class MasterServer {
         Mechanics mechanics = new Mechanics();
         Ticker ticker = new Ticker(1);
         ticker.registerTickable(mechanics);
+        ReplicationServer replicationServer = new ReplicationServer(8080);
 
         serverThreads.add(accountServer);
         serverThreads.add(mechanics);
         serverThreads.add(ticker);
+        serverThreads.add(replicationServer);
 
         serverThreads.forEach(ServerThread::start);
 

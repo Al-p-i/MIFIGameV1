@@ -9,7 +9,7 @@ import javax.persistence.*;
  * @author a.pomosov
  */
 @Entity
-@Table(name = "USERS")
+@Table(name = "ACCOUNTS")
 public class UserProfile {
     @Id
     @GeneratedValue(generator="increment")

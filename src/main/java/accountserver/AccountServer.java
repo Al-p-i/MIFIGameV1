@@ -3,6 +3,7 @@ package accountserver;
 import dao.DatabaseService;
 import dao.UserProfileDAO;
 import dao.UserProfileDAOImpl;
+import main.ApplicationContext;
 import main.ServerThread;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

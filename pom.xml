@@ -39,6 +39,7 @@
             <artifactId>jetty-servlet</artifactId>
             <version>9.3.7.v20160115</version>
         </dependency>
+
         <!-- http://mvnrepository.com/artifact/com.caucho/hessian -->
         <dependency>
             <groupId>com.caucho</groupId>
@@ -60,11 +61,13 @@
             <artifactId>gson</artifactId>
             <version>2.6.1</version>
         </dependency>
+        <!-- http://mvnrepository.com/artifact/postgresql/postgresql -->
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.4.191</version>
+            <groupId>postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.1-901-1.jdbc4</version>
         </dependency>
+
         <!-- Hibernate -->
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -81,6 +84,16 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty.websocket</groupId>
+            <artifactId>websocket-api</artifactId>
+            <version>9.3.7.v20160115</version>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty.websocket</groupId>
+            <artifactId>websocket-servlet</artifactId>
+            <version>9.3.7.v20160115</version>
         </dependency>
     </dependencies>
 
