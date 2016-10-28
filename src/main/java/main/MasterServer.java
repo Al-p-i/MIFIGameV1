@@ -5,6 +5,7 @@ import frontend.ReplicationServer;
 import mechanics.Mechanics;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 import ticker.Ticker;
 
 import java.util.ArrayList;
@@ -17,7 +18,9 @@ import java.util.concurrent.TimeUnit;
  * Created by apomosov on 14.05.16.
  */
 public class MasterServer {
+    @NotNull
     private final static Logger log = LogManager.getLogger(MasterServer.class);
+    @NotNull
     private final List<ServerThread> serverThreads = new ArrayList<>();
 
 
@@ -44,7 +47,7 @@ public class MasterServer {
         }
     }
 
-    public static void main(String[] args) throws ExecutionException, InterruptedException {
+    public static void main(@NotNull String[] args) throws ExecutionException, InterruptedException {
         MasterServer server = new MasterServer();
         server.start();
     }

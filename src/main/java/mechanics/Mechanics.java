@@ -3,12 +3,14 @@ package mechanics;
 import main.ServerThread;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 import ticker.Tickable;
 
 /**
  * Created by apomosov on 14.05.16.
  */
 public class Mechanics extends ServerThread implements Tickable {
+    @NotNull
     private final static Logger log = LogManager.getLogger(Mechanics.class);
 
     public Mechanics() {

@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
@@ -19,6 +20,7 @@ import java.util.Map;
  * Created by apomosov on 15.05.16.
  */
 public class AccountServer extends ServerThread {
+    @NotNull
     private static final Logger log = LogManager.getLogger(AccountServer.class);
     private final int port;
 
@@ -28,7 +30,7 @@ public class AccountServer extends ServerThread {
         this.port = port;
     }
 
-    public boolean addUser(UserProfile userProfile) {
+    public boolean addUser(@NotNull UserProfile userProfile) {
         UserProfileDAO userProfileDAO;
         try {
             userProfileDAO = new UserProfileDAOImpl(DatabaseService.getInstance().getSessionFactory());
@@ -40,7 +42,8 @@ public class AccountServer extends ServerThread {
         return true;
     }
 
-    public UserProfile getUser(String login) {
+    @NotNull
+    public UserProfile getUser(@NotNull String login) {
         UserProfileDAO userProfileDAO;
         try {
             userProfileDAO = new UserProfileDAOImpl(DatabaseService.getInstance().getSessionFactory());
