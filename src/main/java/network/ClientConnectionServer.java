@@ -8,16 +8,18 @@ import org.apache.logging.log4j.Logger;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.servlet.ServletHolder;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by apomosov on 13.06.16.
  */
-public class ClientConnectionService extends ServerThread {
+public class ClientConnectionServer extends ServerThread {
+  @NotNull
   private final static Logger log = LogManager.getLogger(MasterServer.class);
   private final int port;
 
-  public ClientConnectionService(int port) {
-    super("replication_server");
+  public ClientConnectionServer(int port) {
+    super("client_connection_service");
     this.port = port;
   }
 
@@ -34,23 +36,17 @@ public class ClientConnectionService extends ServerThread {
     ClientConnectionServlet clientConnectionServlet = new ClientConnectionServlet();
     ApplicationContext.getInstance().addServlet(new ServletHolder(clientConnectionServlet), "/clientConnection");
 
-    log.info("ClientConnectionService started on port " + port);
-
     try {
       server.start();
     } catch (Exception e) {
       e.printStackTrace();
     }
-    try {
-      server.join();
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
+    log.info(getName() + " started on port " + port);
   }
 
-  public static void main(String[] args) throws InterruptedException {
-    ClientConnectionService clientConnectionService = new ClientConnectionService(7001);
-    clientConnectionService.start();
-    clientConnectionService.join();
+  public static void main(@NotNull String[] args) throws InterruptedException {
+    ClientConnectionServer clientConnectionServer = new ClientConnectionServer(7001);
+    clientConnectionServer.start();
+    clientConnectionServer.join();
   }
 }

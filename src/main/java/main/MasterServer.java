@@ -1,7 +1,7 @@
 package main;
 
 import accountserver.AccountServer;
-import network.ClientConnectionService;
+import network.ClientConnectionServer;
 import mechanics.Mechanics;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,16 +24,16 @@ public class MasterServer {
 
     private void start() throws ExecutionException, InterruptedException {
         log.info("MasterServer started");
-        AccountServer accountServer = new AccountServer(7000);
+        AccountServer accountServer = new AccountServer(8080);
         Mechanics mechanics = new Mechanics();
         Ticker ticker = new Ticker(1);
         ticker.registerTickable(mechanics);
-        ClientConnectionService clientConnectionService = new ClientConnectionService(7001);
+        ClientConnectionServer clientConnectionServer = new ClientConnectionServer(7000);
 
         serverThreads.add(accountServer);
-        serverThreads.add(mechanics);
-        serverThreads.add(clientConnectionService);
-        serverThreads.add(ticker);
+        //serverThreads.add(mechanics);
+        serverThreads.add(clientConnectionServer);
+        //serverThreads.add(ticker);
 
         serverThreads.forEach(ServerThread::start);
 

@@ -1,6 +1,6 @@
 package dao;
 
-import accountserver.UserProfile;
+import oldaccountserver.UserProfile;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;

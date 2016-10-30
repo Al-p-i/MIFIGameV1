@@ -9,12 +9,13 @@ import org.jetbrains.annotations.NotNull;
  * Created by apomosov on 15.05.16.
  */
 public abstract class ServerThread extends Thread {
+  @NotNull
   private static final Logger log = LogManager.getLogger(ServerThread.class);
 
   public ServerThread(@NotNull String name) {
     super(name);
     if (log.isInfoEnabled()) {
-      log.info("Server thread [" + name + "] created");
+      log.info("AccountServer thread [" + name + "] created");
     }
   }
 }

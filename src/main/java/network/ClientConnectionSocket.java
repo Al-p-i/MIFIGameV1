@@ -1,38 +1,58 @@
 package network;
 
+import com.google.gson.JsonObject;
+import main.MasterServer;
+import network.handlers.PacketHandlerAuth;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.WebSocketAdapter;
+import org.jetbrains.annotations.NotNull;
+import protocol.CommandAuth;
+import protocol.CommandLeaderBoard;
+import protocol.CommandResetLevel;
+import protocol.CommandUpdateCells;
+import utils.JSONHelper;
 
 import java.util.Arrays;
 
 public class ClientConnectionSocket extends WebSocketAdapter {
+  private final static @NotNull Logger log = LogManager.getLogger(ClientConnectionSocket.class);
+
   @Override
-  public void onWebSocketConnect(Session sess) {
+  public void onWebSocketConnect(@NotNull Session sess) {
     super.onWebSocketConnect(sess);
-    System.out.println("Socket connected: " + sess);
+    log.info("Socket connected: " + sess);
   }
 
   @Override
-  public void onWebSocketText(String message) {
+  public void onWebSocketText(@NotNull String message) {
     super.onWebSocketText(message);
-    System.out.println("Received packet: " + message);
+    if (getSession().isOpen()) {
+      handlePacket(message);
+    }
+    log.info("Received packet: " + message);
   }
 
   @Override
-  public void onWebSocketClose(int statusCode, String reason) {
+  public void onWebSocketClose(int statusCode, @NotNull String reason) {
     super.onWebSocketClose(statusCode, reason);
-    System.out.println("Socket closed: [" + statusCode + "] " + reason);
+    log.info("Socket closed: [" + statusCode + "] " + reason);
   }
 
   @Override
-  public void onWebSocketError(Throwable cause) {
+  public void onWebSocketError(@NotNull Throwable cause) {
     super.onWebSocketError(cause);
     cause.printStackTrace(System.err);
   }
 
-  @Override
-  public void onWebSocketBinary(byte[] payload, int offset, int len) {
-    super.onWebSocketBinary(payload, offset, len);
-    System.out.println("Received binary: [" + Arrays.toString(payload) + "] ");
+  public void handlePacket(@NotNull String msg) {
+    JsonObject json = JSONHelper.getJSONObject(msg);
+    String name = json.get("command").getAsString();
+    switch (name) {
+      case CommandAuth.NAME:
+        new PacketHandlerAuth(getSession(), msg);
+        break;
+    }
   }
 }

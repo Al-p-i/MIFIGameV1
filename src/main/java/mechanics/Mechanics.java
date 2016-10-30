@@ -20,6 +20,7 @@ public class Mechanics extends ServerThread implements Tickable {
     @Override
     public synchronized void start() {
         super.start();
+        log.info(getName() + " started");
     }
 
     @Override

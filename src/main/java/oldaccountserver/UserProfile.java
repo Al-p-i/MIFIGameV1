@@ -1,4 +1,4 @@
-package accountserver;
+package oldaccountserver;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.jetbrains.annotations.NotNull;
