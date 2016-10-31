@@ -1,4 +1,4 @@
-import oldaccountserver.UserProfile;
+import persistantaccountserver.UserProfile;
 import dao.DatabaseService;
 import dao.UserProfileDAO;
 import dao.UserProfileDAOImpl;

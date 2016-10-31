@@ -1,6 +1,6 @@
 package network;
 
-import main.ApplicationContext;
+import main.ServletContext;
 import main.MasterServer;
 import main.ServerThread;
 import org.apache.logging.log4j.LogManager;
@@ -30,11 +30,11 @@ public class ClientConnectionServer extends ServerThread {
     connector.setPort(port);
     server.addConnector(connector);
 
-    server.setHandler(ApplicationContext.getInstance());
+    server.setHandler(ServletContext.getInstance());
 
     // Add a websocket to a specific path spec
     ClientConnectionServlet clientConnectionServlet = new ClientConnectionServlet();
-    ApplicationContext.getInstance().addServlet(new ServletHolder(clientConnectionServlet), "/clientConnection");
+    ServletContext.getInstance().addServlet(new ServletHolder(clientConnectionServlet), "/clientConnection");
 
     try {
       server.start();

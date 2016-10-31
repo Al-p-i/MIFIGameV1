@@ -1,12 +1,13 @@
 package network.handlers;
 
+import main.ApplicationContext;
+import matchmaker.MatchMaker;
+import model.Player;
 import network.packets.PacketAuthFail;
 import network.packets.PacketAuthOk;
-import org.eclipse.jetty.server.Authentication;
 import org.eclipse.jetty.websocket.api.Session;
 import org.jetbrains.annotations.NotNull;
 import protocol.CommandAuth;
-import protocol.CommandAuthFail;
 import utils.JSONDeserializationException;
 import utils.JSONHelper;
 
@@ -30,10 +31,11 @@ public class PacketHandlerAuth {
     } else {
       try {
         new PacketAuthOk().write(session);
+        Player player = new Player(commandAuth.getLogin());
+        ApplicationContext.get().get(MatchMaker.class).joinGame(player);
       } catch (IOException e) {
         e.printStackTrace();
       }
-      //TODO
     }
   }
 }

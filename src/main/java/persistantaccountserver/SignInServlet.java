@@ -1,4 +1,4 @@
-package oldaccountserver;
+package persistantaccountserver;
 
 import com.google.gson.JsonObject;
 

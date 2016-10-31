@@ -39,4 +39,12 @@ public class Player {
   public List<PlayerCell> getCells() {
     return cells;
   }
+
+  @NotNull
+  @Override
+  public String toString() {
+    return "Player{" +
+        "name='" + name + '\'' +
+        '}';
+  }
 }

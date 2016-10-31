@@ -16,8 +16,8 @@ import java.util.List;
  *
  * @author Alpi
  */
-public class SinglePlayerMatchMaker implements MatchMaker {
-  private final @NotNull Logger log = LogManager.getLogger(SinglePlayerMatchMaker.class);
+public class MatchMakerImpl implements MatchMaker {
+  private final @NotNull Logger log = LogManager.getLogger(MatchMakerImpl.class);
   @NotNull
   private final List<GameSession> activeGameSessions = new ArrayList<>();
 

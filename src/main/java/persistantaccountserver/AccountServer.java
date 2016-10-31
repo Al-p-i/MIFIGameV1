@@ -1,4 +1,4 @@
-package oldaccountserver;
+package persistantaccountserver;
 
 import dao.DatabaseService;
 import dao.UserProfileDAO;

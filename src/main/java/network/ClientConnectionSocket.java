@@ -10,8 +10,6 @@ import org.eclipse.jetty.websocket.api.WebSocketAdapter;
 import org.jetbrains.annotations.NotNull;
 import protocol.CommandAuth;
 import protocol.CommandLeaderBoard;
-import protocol.CommandResetLevel;
-import protocol.CommandUpdateCells;
 import utils.JSONHelper;
 
 import java.util.Arrays;

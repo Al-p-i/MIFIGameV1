@@ -43,7 +43,7 @@
         <property name="hbm2ddl.auto">create</property>
 
         <!-- Names the annotated entity class -->
-        <mapping class="oldaccountserver.UserProfile"/>
+        <mapping class="persistantaccountserver.UserProfile"/>
 
     </session-factory>
 
