@@ -1,8 +1,7 @@
 package accountserver;
 
 import accountserver.api.AuthenticationFilter;
-import main.MasterServer;
-import main.ServerThread;
+import main.Service;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.jetty.servlet.ServletContextHandler;
@@ -10,7 +9,7 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import org.jetbrains.annotations.NotNull;
 
 
-public class AccountServer extends ServerThread {
+public class AccountServer extends Service {
   private final static @NotNull Logger log = LogManager.getLogger(AccountServer.class);
   private final int port;
 

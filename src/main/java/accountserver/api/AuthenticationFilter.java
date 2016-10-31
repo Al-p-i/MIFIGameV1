@@ -35,6 +35,6 @@ public class AuthenticationFilter implements ContainerRequestFilter {
   }
 
   private boolean validateToken(@NotNull String token) {
-    return Authentication.validateToken(token);
+    return AuthenticationServlet.validateToken(token);
   }
 }

@@ -1,6 +1,8 @@
 package model;
 
+import main.ApplicationContext;
 import org.jetbrains.annotations.NotNull;
+import utils.IDGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,13 +11,16 @@ import java.util.List;
  * @author apomosov
  */
 public class Player {
+  private final int id;
   @NotNull
   private String name;
   @NotNull
   private final List<PlayerCell> cells = new ArrayList<>();
 
-  public Player(@NotNull String name) {
+  public Player(int id, @NotNull String name) {
+    this.id = id;
     this.name = name;
+    addCell(new PlayerCell(ApplicationContext.instance().get(IDGenerator.class).next(), 0, 0));
   }
 
   public void addCell(@NotNull PlayerCell cell) {
@@ -38,6 +43,10 @@ public class Player {
   @NotNull
   public List<PlayerCell> getCells() {
     return cells;
+  }
+
+  public int getId() {
+    return id;
   }
 
   @NotNull

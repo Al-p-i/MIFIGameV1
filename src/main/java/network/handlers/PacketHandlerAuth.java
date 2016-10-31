@@ -1,13 +1,16 @@
 package network.handlers;
 
+import accountserver.api.AuthenticationServlet;
 import main.ApplicationContext;
 import matchmaker.MatchMaker;
 import model.Player;
+import network.ClientConnections;
 import network.packets.PacketAuthFail;
 import network.packets.PacketAuthOk;
 import org.eclipse.jetty.websocket.api.Session;
 import org.jetbrains.annotations.NotNull;
 import protocol.CommandAuth;
+import utils.IDGenerator;
 import utils.JSONDeserializationException;
 import utils.JSONHelper;
 
@@ -22,7 +25,7 @@ public class PacketHandlerAuth {
       e.printStackTrace();
       return;
     }
-    if (!accountserver.api.Authentication.validateToken(commandAuth.getToken())) {
+    if (!AuthenticationServlet.validateToken(commandAuth.getToken())) {
       try {
         new PacketAuthFail(commandAuth.getLogin(), commandAuth.getToken(), "Invalid user or password").write(session);
       } catch (IOException e) {
@@ -30,9 +33,10 @@ public class PacketHandlerAuth {
       }
     } else {
       try {
+        Player player = new Player(ApplicationContext.instance().get(IDGenerator.class).next(), commandAuth.getLogin());
+        ApplicationContext.instance().get(ClientConnections.class).registerConnection(player, session);
         new PacketAuthOk().write(session);
-        Player player = new Player(commandAuth.getLogin());
-        ApplicationContext.get().get(MatchMaker.class).joinGame(player);
+        ApplicationContext.instance().get(MatchMaker.class).joinGame(player);
       } catch (IOException e) {
         e.printStackTrace();
       }

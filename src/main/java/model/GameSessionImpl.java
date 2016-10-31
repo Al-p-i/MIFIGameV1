@@ -26,13 +26,14 @@ public class GameSessionImpl implements GameSession {
   public GameSessionImpl(@NotNull FoodGenerator foodGenerator, @NotNull PlayerPlacer playerPlacer, @NotNull VirusGenerator virusGenerator) {
     this.foodGenerator = foodGenerator;
     this.playerPlacer = playerPlacer;
-
     this.virusGenerator = virusGenerator;
+    virusGenerator.generate();
   }
 
   @Override
   public void join(@NotNull Player player) {
     players.add(player);
+    this.playerPlacer.place(player);
   }
 
   @Override
@@ -41,7 +42,7 @@ public class GameSessionImpl implements GameSession {
   }
 
   @Override
-  public void tick(long elapsedNanos) {
-    //TODO: autoimplemented stub
+  public List<Player> getPlayers() {
+    return new ArrayList<>(players);
   }
 }

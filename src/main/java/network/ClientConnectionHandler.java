@@ -1,7 +1,6 @@
 package network;
 
 import com.google.gson.JsonObject;
-import main.MasterServer;
 import network.handlers.PacketHandlerAuth;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,13 +8,10 @@ import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.WebSocketAdapter;
 import org.jetbrains.annotations.NotNull;
 import protocol.CommandAuth;
-import protocol.CommandLeaderBoard;
 import utils.JSONHelper;
 
-import java.util.Arrays;
-
-public class ClientConnectionSocket extends WebSocketAdapter {
-  private final static @NotNull Logger log = LogManager.getLogger(ClientConnectionSocket.class);
+public class ClientConnectionHandler extends WebSocketAdapter {
+  private final static @NotNull Logger log = LogManager.getLogger(ClientConnectionHandler.class);
 
   @Override
   public void onWebSocketConnect(@NotNull Session sess) {
@@ -26,10 +22,10 @@ public class ClientConnectionSocket extends WebSocketAdapter {
   @Override
   public void onWebSocketText(@NotNull String message) {
     super.onWebSocketText(message);
+    log.info("Received packet: " + message);
     if (getSession().isOpen()) {
       handlePacket(message);
     }
-    log.info("Received packet: " + message);
   }
 
   @Override

@@ -1,6 +1,5 @@
 package main;
 
-import dao.DatabaseService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
@@ -8,11 +7,11 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by apomosov on 15.05.16.
  */
-public abstract class ServerThread extends Thread {
+public abstract class Service extends Thread {
   @NotNull
-  private static final Logger log = LogManager.getLogger(ServerThread.class);
+  private static final Logger log = LogManager.getLogger(Service.class);
 
-  public ServerThread(@NotNull String name) {
+  public Service(@NotNull String name) {
     super(name);
     if (log.isInfoEnabled()) {
       log.info("AccountServer thread [" + name + "] created");

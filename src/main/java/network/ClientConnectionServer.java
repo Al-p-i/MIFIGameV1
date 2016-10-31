@@ -2,7 +2,7 @@ package network;
 
 import main.ServletContext;
 import main.MasterServer;
-import main.ServerThread;
+import main.Service;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.jetty.server.Server;
@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by apomosov on 13.06.16.
  */
-public class ClientConnectionServer extends ServerThread {
+public class ClientConnectionServer extends Service {
   @NotNull
   private final static Logger log = LogManager.getLogger(MasterServer.class);
   private final int port;

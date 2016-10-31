@@ -8,6 +8,6 @@ import org.jetbrains.annotations.NotNull;
 public class ClientConnectionServlet extends WebSocketServlet {
   @Override
   public void configure(@NotNull WebSocketServletFactory factory) {
-    factory.register(ClientConnectionSocket.class);
+    factory.register(ClientConnectionHandler.class);
   }
 }

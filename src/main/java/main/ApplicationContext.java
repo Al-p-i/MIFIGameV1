@@ -17,7 +17,7 @@ public class ApplicationContext {
   private static final @NotNull Logger log = LogManager.getLogger(ApplicationContext.class);
   private static volatile @Nullable ApplicationContext instance;
 
-  public static @NotNull ApplicationContext get() {
+  public static @NotNull ApplicationContext instance() {
     if (instance == null) {
       synchronized (ApplicationContext.class) {
         if (instance == null) {

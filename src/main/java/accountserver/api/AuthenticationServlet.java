@@ -14,9 +14,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Path("/auth")
-public class Authentication {
+public class AuthenticationServlet {
   @NotNull
-  private static final Logger log = LogManager.getLogger(Authentication.class);
+  private static final Logger log = LogManager.getLogger(AuthenticationServlet.class);
 
   @NotNull
   private static ConcurrentHashMap<String, String> credentials;

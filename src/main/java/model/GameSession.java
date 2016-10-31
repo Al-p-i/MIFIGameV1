@@ -3,6 +3,8 @@ package model;
 import org.jetbrains.annotations.NotNull;
 import ticker.Tickable;
 
+import java.util.List;
+
 /**
  * Single agar.io game session
  * <p>Single game session take place in square map, where players battle for food
@@ -10,7 +12,7 @@ import ticker.Tickable;
  *
  * @author Alpi
  */
-public interface GameSession extends Tickable {
+public interface GameSession {
   /**
    * Player can join session whenever there are less then {@link GameConstants#MAX_PLAYERS_IN_SESSION} players within game session
    *
@@ -24,4 +26,6 @@ public interface GameSession extends Tickable {
    * @param player player to leave the game
    */
   void leave(@NotNull Player player);
+
+  List<Player> getPlayers();
 }

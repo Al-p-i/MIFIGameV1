@@ -3,7 +3,7 @@ package persistantaccountserver;
 import dao.DatabaseService;
 import dao.UserProfileDAO;
 import dao.UserProfileDAOImpl;
-import main.ServerThread;
+import main.Service;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.jetty.server.Server;
@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Created by apomosov on 15.05.16.
  */
-public class AccountServer extends ServerThread {
+public class AccountServer extends Service {
   @NotNull
   private static final Logger log = LogManager.getLogger(AccountServer.class);
   private final int port;

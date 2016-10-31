@@ -1,11 +1,12 @@
 package ticker;
 
-import main.ServerThread;
+import main.Service;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.locks.LockSupport;
@@ -13,16 +14,16 @@ import java.util.concurrent.locks.LockSupport;
 /**
  * Created by apomosov on 14.05.16.
  */
-public class Ticker extends ServerThread implements Tickable {
+public class Ticker extends Service implements Tickable {
     private final static Logger log = LogManager.getLogger(Ticker.class);
 
-    private final List<Tickable> tickables;
+    private final ConcurrentLinkedDeque<Tickable> tickables;
     private final long sleepTimeNanos;
-    private volatile AtomicLong tickNumber;
+    private final AtomicLong tickNumber;
 
     public Ticker(int maxTicksPerSecond) {
         super("ticker");
-        this.tickables = new ArrayList<>();
+        this.tickables = new ConcurrentLinkedDeque<>();
         this.tickNumber = new AtomicLong(0);
         this.sleepTimeNanos = TimeUnit.SECONDS.toNanos(1) / maxTicksPerSecond;
     }
@@ -53,7 +54,9 @@ public class Ticker extends ServerThread implements Tickable {
     public void tick(long elapsedNanos) {
         log.info("=== tick " + tickNumber + " ===");
         tickNumber.incrementAndGet();
-        tickables.forEach(t -> t.tick(elapsedNanos));
+      for (Tickable tickable : tickables) {
+        tickable.tick(elapsedNanos);
+      }
     }
 
     @Override
